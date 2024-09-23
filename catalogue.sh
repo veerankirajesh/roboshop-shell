@@ -1,17 +1,18 @@
 #!/bin/bash
 ID=$(id -u)
-R="/e[31m"
-G="/e[32m"
-Y="/e[33m"
-N="/e[0m"
-TIMESTAMP=$(date +%F-%H-%M-%S)
+R="\e[31m"
+G="\e[32m"
+Y="\e[33m"
+N="\e[0m"
+TIMESTAMP=$(date +%F-%H-%M-S%)
 LOGFILE="/tmp/$0-$TIMESTAMP.log"
-VALIDATE(){
+echo "script stareted executing at $TIMESTAMP" &>> $LOGFILE
+VALIDATE() {
     if [ $1 -ne 0 ]
     then
-        echo -e "$2 ..$R FAILED $N"
+        echo -e "$2 ..$R FALID $N"
         exit 1
-    else 
+    else
         echo -e "$2 ..$G SUCCESS $N"
     fi    
 }
@@ -21,7 +22,7 @@ then
     exit 1
 else
     echo " you are root user "
-fi
+fi 
 dnf module disable nodejs -y &>> $LOGFILE
 VALIDATE $? "dnf module disable"
 dnf module enable nodejs:18 -y &>> $LOGFILE
