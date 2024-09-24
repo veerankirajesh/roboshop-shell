@@ -87,12 +87,8 @@ systemctl start catalogue &>> $LOGFILE
 VALIDATE $? "Starting catalogue"
 
 cp /home/centos/roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo
-
 VALIDATE $? "copying mongodb repo"
-
 dnf install mongodb-org-shell -y &>> $LOGFILE
-
 VALIDATE $? "Installing MongoDB client"
-
 mongo --host $MONGDB_HOST </app/schema/catalogue.js &>> $LOGFILE
 VALIDATE $? "Loading catalouge data into MongoDB"
