@@ -50,50 +50,27 @@ then
 else
     echo -e "roboshop user already exist $Y SKIPPING $N"
 fi
-
 mkdir -p /app
-
 VALIDATE $? "creating app directory"
-
 curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip  &>> $LOGFILE
-
 VALIDATE $? "Downloading catalogue application"
-
 cd /app 
-
 unzip -o /tmp/catalogue.zip  &>> $LOGFILE
-
 VALIDATE $? "unzipping catalogue"
-
 npm install  &>> $LOGFILE
-
 VALIDATE $? "Installing dependencies"
-
 # use absolute, because catalogue.service exists there
 cp /home/centos/roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service &>> $LOGFILE
-
 VALIDATE $? "Copying catalogue service file"
-
 systemctl daemon-reload &>> $LOGFILE
-
 VALIDATE $? "catalogue daemon reload"
-
 systemctl enable catalogue &>> $LOGFILE
-
 VALIDATE $? "Enable catalogue"
-
 systemctl start catalogue &>> $LOGFILE
-
 VALIDATE $? "Starting catalogue"
-
 cp /home/centos/roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo
-
 VALIDATE $? "copying mongodb repo"
-
 dnf install mongodb-org-shell -y &>> $LOGFILE
-
 VALIDATE $? "Installing MongoDB client"
-
 mongo --host mongodb.rajesh76.online </app/schema/catalogue.js &>> $LOGFILE
-
 VALIDATE $? "Loading catalouge data into MongoDB"
