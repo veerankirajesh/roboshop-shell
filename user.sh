@@ -17,7 +17,7 @@ VALIDATE(){
         echo -e "$1 ...$Y SUCCESS $N"
     fi         
 }
-fi [ ID -ne 0 ]
+if [ $ID -ne 0 ]
 then
     echo -e "$R ERROR::please run this script root user $N"
     exit 1
