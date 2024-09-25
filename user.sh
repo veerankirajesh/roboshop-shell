@@ -5,7 +5,7 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
-MONGDB_HOST=mongodb.rajesh.online
+MONGDB_HOST=mongodb.rajesh76.online
 
 TIMESTAMP=$(date +%F-%H-%M-%S)
 LOGFILE="/tmp/$0-$TIMESTAMP.log"
@@ -18,7 +18,7 @@ VALIDATE(){
         echo -e "$2 ... $R FAILED $N"
         exit 1
     else
-        echo -e "$2 ... $Y SUCCESS $N"
+        echo -e "$2 ... $G SUCCESS $N"
     fi
 }
 
